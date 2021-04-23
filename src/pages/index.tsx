@@ -139,7 +139,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
 
 
 //SSG
-//Como não tem muita movimentação de dados, (inclusão de novo podcast) 1 vez ao diz (exemplo desse caso), é gerado um HTML estatico e 
+//Como não tem muita movimentação de dados, (inclusão de novo podcast) 1 vez ao dia (exemplo desse caso), é gerado um HTML estatico e 
 //terá atualização somente 1 vez ao dia. Ex: revalidate: 60 * 60 * 8, -> revalidate: 60segundos * 60 * 8, (60 * 60 = 1 hora -> * 8 = 8 horas)
 //resultado = a cada 8 horas
 
