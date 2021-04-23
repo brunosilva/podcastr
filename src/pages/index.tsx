@@ -2,7 +2,7 @@
 //SSR
 //SSG
 
-import { useEffect } from "react"
+import { useEffect, useContext } from "react"
 import { GetStaticProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,6 +12,7 @@ import { api } from "../services/api";
 import { convertDurationToTimeString } from "../utils/convertDurationToTimeString";
 
 import styles from './home.module.scss';
+import { PlayerContext } from "../contexts/PlayerContext";
 
 //Aqui definimos tipagem do typescript (Episode)
 type Episode = {
@@ -48,6 +49,8 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
   //     .then(data => console.log(data))
   // }, [])
 
+  const { play } = useContext(PlayerContext)
+
   return (
     // Ao importar o scss lá no começo e definir o nome "styles" conseguimos passar o seletor/classe como parâmetro.
     <div className={styles.homepage}>
@@ -67,7 +70,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <span>{episode.durationAsString}</span>
                 </div>
 
-                <button type="button">
+                <button type="button" onClick={() => play(episode)}>
                   <img src="/play-green.svg" alt="Tocar episódio"/>
                 </button>
               </li>

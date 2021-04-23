@@ -61,4 +61,8 @@ No arquivo "_app.tsx" definir tag `<PlayerContext.Provider>` envolvendo todo con
 </PlayerContext.Provider>
 ```
 
+Após essas configs, consigo ir nos components `player` e `index` do diretório pages e fazer a chamada. Primeiro import `const player = useContext(PlayerContext)` e depois `{player}`
+
+
+
 [Bruno Silva](https://www.linkedin.com/in/bruno-silva0109/)
