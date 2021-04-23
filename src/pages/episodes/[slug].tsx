@@ -64,7 +64,8 @@ export default function Episode({ episode }: EpisodeProps){
     )
 }
 
-//
+//Obrigatório usar este método em toda página que usar geração estática e também em toda página que recebe parâmetro dinâmino no nome
+//ex.: [slug]
 export const getStaticPaths: GetStaticPaths = async() => {
     return {
         paths: [],
