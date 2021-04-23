@@ -92,7 +92,8 @@ export const getStaticProps: GetStaticProps = async(ctx) => {
         url: data.file.url
     };
 
-    //return a props com objeto episode preenchido e criado parâmetro para atualização a cada tempo definido no revalidate
+    //return a props com objeto episode preenchido
+    //revalidate -> definição de quanto em quanto tempo será atualizado
     return {
         props:{
             episode,
