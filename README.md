@@ -6,6 +6,7 @@ Project #NLW 05
 
 Dev Podcastr using ReactJs + Next.js
 
+
 ### Modelos de páginas - SPA, SSR e SSG
 
 * SPA
@@ -27,6 +28,7 @@ Executa toda vez que alguem acessa a home da aplicação.
 * SSG
 
 Como não tem muita movimentação de dados, (inclusão de novo podcast) 1 vez ao dia (exemplo desse caso), é gerado um HTML estatico e terá atualização somente 1 vez ao dia ou de acordo com o calculo do `revalidate`.
+
 
 ### Gerar página(s) estática dinamicamente - [slug]
 
