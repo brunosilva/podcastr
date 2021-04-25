@@ -1,10 +1,6 @@
-//SPA
-//SSR
-//SSG
-
-import { useEffect, useContext } from "react"
 import { GetStaticProps } from 'next';
 import Image from 'next/image';
+import Head from 'next/head';
 import Link from 'next/link';
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
@@ -12,7 +8,7 @@ import { api } from "../services/api";
 import { convertDurationToTimeString } from "../utils/convertDurationToTimeString";
 
 import styles from './home.module.scss';
-import { PlayerContext } from "../contexts/PlayerContext";
+import { usePlayer } from "../contexts/PlayerContext";
 
 //Aqui definimos tipagem do typescript (Episode)
 type Episode = {
@@ -35,7 +31,7 @@ type HomeProps = {
 //Passamos os arrays de retorno com a tipagem definido.
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
 
-  const { playList } = useContext(PlayerContext)
+  const { playList } = usePlayer();
 
   //Principio da imutabilidade. Quando for criar alguma informação, é legal sempre copiar a informação anterior ([...latestEpisodes, ...allEpisodes])
   //e não apenas atualizar.
@@ -45,6 +41,10 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
   return (
     // Ao importar o scss lá no começo e definir o nome "styles" conseguimos passar o seletor/classe como parâmetro.
     <div className={styles.homepage}>
+      <Head>
+        <title>Home | Podcast</title>
+      </Head>
+
       <section className={styles.latestEpisodes}>
         <h2>Últimos Lançamentos</h2>
         <ul>
