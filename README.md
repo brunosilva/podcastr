@@ -15,6 +15,31 @@ Single Page Application
 
 Pode mostrar conteudo renderizado na tela antes de finalizar o carregamento dos dados
 
+  PROBLEMA: Se precisa das informações disponiveis assim  que a página é mostrada para o usuario e não carregadas depois
+
+  useEffects -> Hooks -> Dispara algo sempre que alguma coisa mudar na aplicação
+
+  Quando algo mudar na aplicação, quero que algo aconteça -> efeitos colaterais
+
+  "() => {}" -> o que quero executar
+
+  "[]" -> quando quero executar. Pode conter uma variável dentro e sempre que mudar, é executando o que é desejado
+
+         No caso do React se quero que execute assim que o component for exibido na tela, basta passar o array vazio
+
+
+Exemplo de chamada:
+
+```
+  useEffect(() => {
+
+    //chamada API
+    fetch('http://localhost:3333/episodes')
+      .then(response => response.json())
+      .then(data => console.log(data))
+  }, [])
+```
+
 
 * SSR 
 
@@ -24,10 +49,34 @@ Requisição é feito pelo Next então quando o conteudo for exibido para o usu�
 
 Executa toda vez que alguem acessa a home da aplicação.
 
+-----------------------------------------------------------------
+
+Server Side Rendering, ou Renderização do Lado do Servidor. -> feito pelo Next.js
+
+Requisição é feito pelo Next então quando o conteudo for exibido para o usuário final, já vai ter o conteudo API disponível
+
+Executa toda vez que alguem acessa a home da aplicação.
+
+Exemplo de chamada:
+
+```
+export async function getServerSideProps(){
+  const response = await fetch('http://localhost:3333/episodes')
+  const data = await response.json()
+
+  return {
+    props:{
+      episodes: data,
+    }
+  }
+}
+```
 
 * SSG
 
 Como não tem muita movimentação de dados, (inclusão de novo podcast) 1 vez ao dia (exemplo desse caso), é gerado um HTML estatico e terá atualização somente 1 vez ao dia ou de acordo com o calculo do `revalidate`.
+
+Como não tem muita movimentação de dados, (inclusão de novo podcast) 1 vez ao dia (exemplo desse caso), é gerado um HTML estatico e terá atualização somente 1 vez ao dia. Ex: revalidate: 60 * 60 * 8, -> revalidate: 60segundos * 60 * 8, (60 * 60 = 1 hora -> * 8 = 8 horas) resultado = a cada 8 horas
 
 
 ### Gerar página(s) estática dinamicamente - [slug]
