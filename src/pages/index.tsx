@@ -34,22 +34,13 @@ type HomeProps = {
 
 //Passamos os arrays de retorno com a tipagem definido.
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
-  //SPA
-  //PROBLEMA: Se precisa das informações disponiveis assim  que a página é mostrada para o usuario e não carregadas depois
-  //useEffects -> Hooks -> Dispara algo sempre que alguma coisa mudar na aplicação
-  // Quando algo mudar na aplicação, quero que algo aconteça -> efeitos colaterais
-  //"() => {}" -> o que quero executar
-  //"[]" -> quando quero executar. Pode conter uma variável dentro e sempre que mudar, é executando o que é desejado
-  //        No caso do React se quero que execute assim que o component for exibido na tela, basta passar o array vazio
-  // useEffect(() => {
 
-  //   //chamada API
-  //   fetch('http://localhost:3333/episodes')
-  //     .then(response => response.json())
-  //     .then(data => console.log(data))
-  // }, [])
+  const { playList } = useContext(PlayerContext)
 
-  const { play } = useContext(PlayerContext)
+  //Principio da imutabilidade. Quando for criar alguma informação, é legal sempre copiar a informação anterior ([...latestEpisodes, ...allEpisodes])
+  //e não apenas atualizar.
+  //Aqui, copiamos as infos ([...latestEpisodes, ...allEpisodes]) para uma nova const -> episodeList.
+  const episodeList = [...latestEpisodes, ...allEpisodes];
 
   return (
     // Ao importar o scss lá no começo e definir o nome "styles" conseguimos passar o seletor/classe como parâmetro.
@@ -57,7 +48,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
       <section className={styles.latestEpisodes}>
         <h2>Últimos Lançamentos</h2>
         <ul>
-          {latestEpisodes.map(episode => {
+          {latestEpisodes.map((episode, index) => {
             return (
               <li key={episode.id}>
                 <Image width={192} height={192} objectFit="cover" src={episode.thumbnail} alt={episode.title} />
@@ -70,7 +61,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <span>{episode.durationAsString}</span>
                 </div>
 
-                <button type="button" onClick={() => play(episode)}>
+                <button type="button" onClick={() => playList(episodeList, index)}>
                   <img src="/play-green.svg" alt="Tocar episódio"/>
                 </button>
               </li>
@@ -78,6 +69,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
           })}
         </ul>
       </section>
+
       <section className={styles.allEpisodes}>
         <h2>Todos episódios</h2>
         <table cellSpacing={0}>
@@ -93,7 +85,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
           </thead>
           <tbody>
             {
-              allEpisodes.map(episode => {
+              allEpisodes.map((episode, index) => {
                 return (
                   <tr key={episode.id}>
                     <td style={{ width: 72 }}>
@@ -108,7 +100,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                     <td style={{ width: 100 }}>{episode.publishedAt}</td>
                     <td>{episode.durationAsString}</td>
                     <td>
-                      <button type="button">
+                      <button type="button" onClick={() => playList(episodeList, index + latestEpisodes.length)}>
                         <img src="/play-green.svg" alt="Tocal episodio" />
                       </button>
                     </td>
@@ -123,28 +115,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
     </div>
     )
   }
-  
 
-//SSR
-//Server Side Rendering, ou Renderização do Lado do Servidor. -> feito pelo Next.js
-//Requisição é feito pelo Next então quando o conteudo for exibido para o usuário final, já vai ter o conteudo API disponível
-//Executa toda vez que alguem acessa a home da aplicação.
-// export async function getServerSideProps(){
-//   const response = await fetch('http://localhost:3333/episodes')
-//   const data = await response.json()
-
-//   return {
-//     props:{
-//       episodes: data,
-//     }
-//   }
-// }
-
-
-//SSG
-//Como não tem muita movimentação de dados, (inclusão de novo podcast) 1 vez ao dia (exemplo desse caso), é gerado um HTML estatico e 
-//terá atualização somente 1 vez ao dia. Ex: revalidate: 60 * 60 * 8, -> revalidate: 60segundos * 60 * 8, (60 * 60 = 1 hora -> * 8 = 8 horas)
-//resultado = a cada 8 horas
 
 //Retorno NAO TIPADO -> export async function getStaticProps(){
 //Retorno tipado (Typescript) assinatura abaixo
