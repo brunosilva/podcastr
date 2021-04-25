@@ -41,7 +41,7 @@ export function PlayerContextProvider({ children }: PlayerContextProviderProp) {
     //Quando quero tocar mais que 1 episódio e/ou desejo passar para o próximo, preciso ter todos os episódios.
     //Aqui passo uma lista de episódios e o indice do episódio que quero tocar.
     function playList(list: Episode[], index: number){
-        setEpisodeList([list]);
+        setEpisodeList(list);
         setCurrentEpisodeListIndex(index);
         setIsPlaying(true);
     }
