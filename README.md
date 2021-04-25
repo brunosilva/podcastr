@@ -23,9 +23,7 @@ Pode mostrar conteudo renderizado na tela antes de finalizar o carregamento dos 
 
   "() => {}" -> o que quero executar
 
-  "[]" -> quando quero executar. Pode conter uma variável dentro e sempre que mudar, é executando o que é desejado
-
-         No caso do React se quero que execute assim que o component for exibido na tela, basta passar o array vazio
+  "[]" -> quando quero executar. Pode conter uma variável dentro e sempre que mudar, é executando o que é desejado. No caso do React se quero que execute assim que o component for exibido na tela, basta passar o array vazio
 
 
 Exemplo de chamada:
@@ -48,8 +46,6 @@ Server Side Rendering, ou Renderização do Lado do Servidor. -> feito pelo Next
 Requisição é feito pelo Next então quando o conteudo for exibido para o usuário final, já vai ter o conteudo API disponível
 
 Executa toda vez que alguem acessa a home da aplicação.
-
------------------------------------------------------------------
 
 Server Side Rendering, ou Renderização do Lado do Servidor. -> feito pelo Next.js
 
@@ -79,12 +75,16 @@ Como não tem muita movimentação de dados, (inclusão de novo podcast) 1 vez a
 Como não tem muita movimentação de dados, (inclusão de novo podcast) 1 vez ao dia (exemplo desse caso), é gerado um HTML estatico e terá atualização somente 1 vez ao dia. Ex: revalidate: 60 * 60 * 8, -> revalidate: 60segundos * 60 * 8, (60 * 60 = 1 hora -> * 8 = 8 horas) resultado = a cada 8 horas
 
 
+-----------------------------------------------------------------
+
 ### Gerar página(s) estática dinamicamente - [slug]
 
 
 
 
 
+
+-----------------------------------------------------------------
 
 ### Para clicar no botão tocar e o podcast(audio) iniciar no component do player
 
