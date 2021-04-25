@@ -74,6 +74,48 @@ Como não tem muita movimentação de dados, (inclusão de novo podcast) 1 vez a
 
 Como não tem muita movimentação de dados, (inclusão de novo podcast) 1 vez ao dia (exemplo desse caso), é gerado um HTML estatico e terá atualização somente 1 vez ao dia. Ex: revalidate: 60 * 60 * 8, -> revalidate: 60segundos * 60 * 8, (60 * 60 = 1 hora -> * 8 = 8 horas) resultado = a cada 8 horas
 
+Exemplo de chamada:
+
+```
+export const getStaticProps: GetStaticProps = async () =>{
+  //usando axios -> "./services/api.ts" temos a baseURL para chamada da API
+  const { data } = await api.get('episodes', {
+    params:{
+      _limit: 12,
+      _sort: 'published_at',
+      _order: 'desc'
+    }
+  })
+
+  //Percorrendo todos os episódios e retornando os seguintes dados a seguir de forma TIPADA
+  const episodes = data.map(episode => {
+    return{
+      id: episode.id,
+      title: episode.title,
+      thumbnail: episode.thumbnail,
+      members: episode.members,
+      publishedAt: format(parseISO(episode.published_at), 'd MMM yy', { locale: ptBR }),
+      duration: Number(episode.file.duration),
+      durationAsString: convertDurationToTimeString(Number(episode.file.duration)),
+      url: episode.file.url
+    };
+  })
+
+  //Percorrendo os episódios e retornando os dois últimos episódios incluidos
+  const latestEpisodes = episodes.slice(0, 2);
+
+  //Percorrendo os episódios e retornando os todos menos os dois da linha anterior
+  const allEpisodes = episodes.slice(2, episodes.length);
+
+  return {
+    props:{
+      latestEpisodes,
+      allEpisodes,
+    },
+    revalidate: 60 * 60 * 8, // 8 horas
+  }
+}
+```
 
 -----------------------------------------------------------------
 
