@@ -6,6 +6,10 @@ Project #NLW 05
 
 Dev Podcastr using ReactJs + Next.js
 
+Example:
+![Desktop](https://github.com/brunosilva/podcastr/issues/1#issue-868134048)
+![Mobile](https://github.com/brunosilva/podcastr/issues/2#issue-868136505)
+
 
 ### Modelos de páginas - SPA, SSR e SSG
 
