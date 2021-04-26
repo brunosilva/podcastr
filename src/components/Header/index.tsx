@@ -12,7 +12,7 @@ export default function Header(){
     return(
         <header className={styles.headerContainer}>
             <Link href={`/`}>
-                <img src="/logo.svg" className={styles.logo} alt="Podcastr"/>
+                <img src="/logo.svg" className={styles.logo}  alt="Podcastr"/>
             </Link>
             <p>O melhor para você ouvir</p>
             <span>{currentDate}</span>
