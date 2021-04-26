@@ -36,9 +36,8 @@
             width: 100%;
             flex-wrap: wrap;
 
-            strong{
+            .titleEpisodePlaying{
                 font-size: 1rem;
-                margin-top: 0.5rem;
                 max-width: 80%;
                 white-space: nowrap;
                 overflow:hidden;
